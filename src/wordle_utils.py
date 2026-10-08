@@ -12,8 +12,10 @@ def es_palabra_valida(cadena: str) -> bool:
     Devuelve:
         True si la cadena es una palabra válida, False en otro caso
     '''
-    # TODO: Implementa esta función
-    return True
+    if len(cadena) == 5 and cadena.isalpha():
+        return True
+    else:
+        return False
 
 def calcula_minutos_y_segundos(inicio: datetime, fin: datetime) -> tuple:
     """ 
