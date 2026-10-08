@@ -27,8 +27,11 @@ def calcula_minutos_y_segundos(inicio: datetime, fin: datetime) -> tuple:
     Devuelve:
         Una tupla (minutos, segundos) con la diferencia entre los dos datetime
     """
-    # TODO: Implementa esta función
-    pass
+    diferencia = (fin - inicio)
+    diferencia_segundos = diferencia.total_seconds() % 60
+    diferencia_minutos = diferencia.total_seconds() // 60
+
+    return (int(diferencia_minutos), int(diferencia_segundos))
 
 # TODO: Escribe la cabecera completa e implementa la función quitar_letra
 
@@ -45,7 +48,12 @@ def obtener_pistas(palabra_secreta: str, intento: str) -> str:
     Devuelve:
         Una cadena de 5 caracteres con 'V', 'A' y '_'
     """
-    # TODO: Implementa esta función
-    return "_____"  # Elimina esta línea cuando la implementes
+    resultado = ""
+
+    for char in intento:
+        if char in palabra_secreta:
+            resultado += char
+        else:
+            resultado += "_"
 
 
