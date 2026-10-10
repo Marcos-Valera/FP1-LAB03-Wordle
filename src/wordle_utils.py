@@ -33,11 +33,50 @@ def calcula_minutos_y_segundos(inicio: datetime, fin: datetime) -> tuple:
 
     return (int(diferencia_minutos), int(diferencia_segundos))
 
-# TODO: Escribe la cabecera completa e implementa la función quitar_letra
+def quitar_letra(cadena: str, caracter: str) -> str:
+    cadena_resuelta = ""
+    caracter_quitado = False
+    for char in cadena:
+        if char != caracter:
+            cadena_resuelta += char
+        elif caracter_quitado == True:
+            cadena_resuelta += char
+        else:
+            caracter_quitado = True
 
-# TODO: Escribe la cabecera completa e implementa la función marcar_verdes
+    return cadena_resuelta
 
-# TODO: Escribe la cabecera completa e implementa la función marcar_amarillos
+
+
+
+def marcar_verdes(palabra_secreta: str, intento: str) -> str:
+    aciertos = ""
+    restantes = ""
+
+    for i in range(len(intento)):
+        if intento[i] == palabra_secreta[i]:
+            aciertos += "V"
+        else:
+            aciertos += "_"
+            restantes += palabra_secreta[i]
+
+    return (aciertos, restantes)
+
+print(marcar_verdes("astas","latas"))
+
+def marcar_amarillos(intento: str, verdes: str, restantes: str) -> str:
+    colores = ""
+    for i in range(len(intento)):
+        if verdes[i] == "V":
+            colores += "V"
+        elif intento[i] in restantes:
+            colores += "A"
+            restantes = quitar_letra(restantes, intento[i])
+        else:
+            colores += "_"
+
+    return colores
+
 
 def obtener_pistas(palabra_secreta: str, intento: str) -> str:
     """
@@ -48,12 +87,8 @@ def obtener_pistas(palabra_secreta: str, intento: str) -> str:
     Devuelve:
         Una cadena de 5 caracteres con 'V', 'A' y '_'
     """
-    resultado = ""
 
-    for char in intento:
-        if char in palabra_secreta:
-            resultado += char
-        else:
-            resultado += "_"
+    verdes, restantes = marcar_verdes(palabra_secreta, intento)
+    pistas = marcar_amarillos(intento, verdes, restantes)
 
-
+    return pistas
